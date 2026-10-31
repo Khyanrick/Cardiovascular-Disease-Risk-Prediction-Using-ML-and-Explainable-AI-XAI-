@@ -1,0 +1,46 @@
+
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "explanation-request.schema.json",
+  "title": "ExplanationRequest",
+  "description": "Defines the input required by the explainability service.",
+  "type": "object",
+  "additionalProperties": false,
+
+  "properties": {
+    "prediction_id": {
+      "type": "string",
+      "description": "Identifier of the prediction to explain."
+    },
+
+    "user_id": {
+      "type": "string",
+      "description": "Identifier of the authenticated user."
+    },
+
+    "method": {
+      "type": "string",
+      "enum": [
+        "SHAP",
+        "LIME"
+      ],
+      "description": "Explainability technique requested."
+    },
+
+    "explanation_type": {
+      "type": "string",
+      "enum": [
+        "local",
+        "global"
+      ],
+      "description": "Whether to explain one prediction or overall model behaviour."
+    }
+  },
+
+  "required": [
+    "prediction_id",
+    "user_id",
+    "method",
+    "explanation_type"
+  ]
+}

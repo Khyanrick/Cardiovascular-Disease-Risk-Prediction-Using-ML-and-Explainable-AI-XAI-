@@ -1,0 +1,33 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "register.schema.json",
+  "title": "UserRegistrationRequest",
+  "description": "Defines the data required to register a new user.",
+  "type": "object",
+  "additionalProperties": false,
+
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 100,
+      "description": "Full name of the user."
+    },
+     "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Valid email address of the user."
+    },
+    "password": {
+      "type": "string",
+      "minLength": 8,
+      "maxLength": 128,
+      "description": "Password chosen by the user."
+    }
+  },
+  "required": [
+    "name",
+    "email",
+    "password"
+  ]
+}

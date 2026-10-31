@@ -1,0 +1,98 @@
+
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "explanation-response.schema.json",
+  "title": "ExplanationResponse",
+  "description": "Defines the output returned by the explainability service.",
+  "type": "object",
+  "additionalProperties": false,
+
+  "properties": {
+    "explanation_id": {
+      "type": "string",
+      "description": "Unique identifier for this explanation."
+    },
+
+    "prediction_id": {
+      "type": "string",
+      "description": "Identifier of the prediction being explained."
+    },
+
+    "method": {
+      "type": "string",
+      "enum": ["SHAP", "LIME"]
+    },
+
+    "explanation_type": {
+      "type": "string",
+      "enum": ["local", "global"]
+    },
+
+    "model_version": {
+      "type": "string",
+      "description": "Version of the model being explained."
+    },
+
+    "feature_contributions": {
+      "type": "array",
+      "description": "Feature-level explanation values.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+
+        "properties": {
+          "feature": {
+            "type": "string"
+          },
+
+          "value": {
+            "type": "number",
+            "description": "Original feature value used by the model."
+          },
+
+          "contribution": {
+            "type": "number",
+            "description": "Feature contribution according to the selected explanation method."
+          },
+
+          "direction": {
+            "type": "string",
+            "enum": [
+              "positive",
+              "negative"
+            ],
+            "description": "Direction of contribution relative to the explained model output."
+          }
+        },
+
+        "required": [
+          "feature",
+          "value",
+          "contribution",
+          "direction"
+        ]
+      }
+    },
+
+    "summary": {
+      "type": "string",
+      "description": "Human-readable summary of the explanation."
+    },
+
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+
+  "required": [
+    "explanation_id",
+    "prediction_id",
+    "method",
+    "explanation_type",
+    "model_version",
+    "feature_contributions",
+    "summary",
+    "created_at"
+  ]
+}

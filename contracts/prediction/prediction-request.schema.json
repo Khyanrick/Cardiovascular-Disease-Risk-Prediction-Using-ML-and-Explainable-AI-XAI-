@@ -1,0 +1,79 @@
+
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "prediction-request.schema.json",
+  "title": "PredictionRequest",
+  "description": "Defines the input data required by the cardiovascular risk prediction service.",
+  "type": "object",
+  "additionalProperties": false,
+
+  "properties": {
+    "user_id": {
+      "type": "string",
+      "description": "Identifier of the authenticated user."
+    },
+
+    "features": {
+      "type": "object",
+      "additionalProperties": false,
+
+      "properties": {
+        "age": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 120
+        },
+
+        "sex": {
+          "type": "integer",
+          "enum": [0, 1]
+        },
+
+        "cp": {
+          "type": "integer",
+          "enum": [0, 1, 2, 3],
+          "description": "Chest pain type, using the dataset's encoding."
+        },
+
+        "trestbps": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Resting blood pressure (mm Hg)."
+        },
+
+        "chol": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Serum cholesterol (mg/dl)."
+        },
+
+        "thalach": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Maximum heart rate achieved."
+        },
+
+        "oldpeak": {
+          "type": "number",
+          "minimum": 0,
+          "description": "ST depression induced by exercise relative to rest."
+        }
+      },
+
+      "required": [
+        "age",
+        "sex",
+        "cp",
+        "trestbps",
+        "chol",
+        "thalach",
+        "oldpeak"
+      ]
+    }
+  },
+
+  "required": [
+    "user_id",
+    "features"
+  ]
+}

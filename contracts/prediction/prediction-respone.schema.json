@@ -1,0 +1,74 @@
+
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "prediction-response.schema.json",
+  "title": "PredictionResponse",
+  "description": "Defines the output returned by the cardiovascular prediction service.",
+  "type": "object",
+  "additionalProperties": false,
+
+  "properties": {
+    "prediction_id": {
+      "type": "string",
+      "description": "Unique identifier for this prediction."
+    },
+
+    "user_id": {
+      "type": "string",
+      "description": "Identifier of the authenticated user."
+    },
+
+    "prediction": {
+      "type": "object",
+      "additionalProperties": false,
+
+      "properties": {
+        "result": {
+          "type": "string",
+          "enum": [
+            "low_risk",
+            "high_risk"
+          ],
+          "description": "Predicted class returned by the model."
+        },
+
+        "score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Model output score. Its interpretation depends on model calibration."
+        },
+
+        "model_name": {
+          "type": "string",
+          "description": "Name of the ML model used."
+        },
+
+        "model_version": {
+          "type": "string",
+          "description": "Version of the model used."
+        }
+      },
+
+      "required": [
+        "result",
+        "score",
+        "model_name",
+        "model_version"
+      ]
+    },
+
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the prediction was generated."
+    }
+  },
+
+  "required": [
+    "prediction_id",
+    "user_id",
+    "prediction",
+    "created_at"
+  ]
+}

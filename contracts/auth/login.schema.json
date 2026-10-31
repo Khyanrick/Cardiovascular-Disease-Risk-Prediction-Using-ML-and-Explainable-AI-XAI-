@@ -1,0 +1,29 @@
+
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "login.schema.json",
+  "title": "UserLoginRequest",
+  "description": "Defines the credentials required for user authentication.",
+  "type": "object",
+  "additionalProperties": false,
+
+  "properties": {
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Email address associated with the user account."
+    },
+
+    "password": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "User's account password."
+    }
+  },
+
+  "required": [
+    "email",
+    "password"
+  ]
+}
